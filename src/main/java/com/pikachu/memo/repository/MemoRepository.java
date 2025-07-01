@@ -14,17 +14,26 @@ public class MemoRepository {
     public MemoRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    private final RowMapper<Memo> memoRowMapper = (resultSet, rowNum) ->
-        new Memo(
-                resultSet.getInt("id"),
-                resultSet.getString("title"),
-                resultSet.getString("content")
-        );
 
-    public List<Memo> findAll(){
+    private final RowMapper<Memo> memoRowMapper = (resultSet, rowNum) ->
+            new Memo(
+                    resultSet.getInt("id"),
+                    resultSet.getString("title"),
+                    resultSet.getString("content")
+            );
+
+    public List<Memo> findAll() {
         return jdbcTemplate.query(
-                "SELECT * FROM memo ORDER BY id DESC",  //최신순(내림차순)으로 조회
-                memoRowMapper   //가져온 데이터를 Mapping
+                "SELECT * FROM memo ORDER BY id DESC",
+                memoRowMapper
+        );
+    }
+
+    public Memo findById(int id) {
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM memo WHERE id = ?",
+                memoRowMapper,
+                id
         );
     }
 
@@ -33,5 +42,19 @@ public class MemoRepository {
                 "INSERT INTO memo (title, content) VALUES (?, ?)",
                 title, content
         );  //DB의 정보 변경. 조회는 Query
+    }
+
+    public void update(int id, String title, String content) {
+        jdbcTemplate.update(
+                "UPDATE memo SET title = ?, content = ? WHERE id = ?",
+                title, content, id
+        );
+    }
+
+    public void delete(int id) {
+        jdbcTemplate.update(
+                "DELETE FROM memo WHERE id = ?",
+                id
+        );
     }
 }
