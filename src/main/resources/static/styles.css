@@ -1,9 +1,17 @@
 /* 기본 배경과 폰트 */
+
+@font-face {
+    font-family: 'Paperlogy-8ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
 body {
     margin: 0;
     padding: 0;
     background-color: #fff8dc;
-    font-family: "Courier New", Courier, monospace;
+    font-family: 'Paperlogy-8ExtraBold', 'sans-serif';
     color: #333;
 }
 
@@ -37,6 +45,7 @@ textarea {
     border: 1px solid #d3b8ae;
     border-radius: 6px;
     font-size: 16px;
+    font-family: 'Paperlogy-8ExtraBold', 'sans-serif';
     background-color: #fefcf8;
     resize: vertical;
     box-sizing: border-box;
@@ -55,6 +64,7 @@ button {
     color: white;
     border: none;
     border-radius: 6px;
+    font-family: 'Paperlogy-8ExtraBold', 'sans-serif';
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
